@@ -2,6 +2,8 @@ package com.devsuperior.dsvendas.dto;
 
 import java.time.LocalDate;
 
+import com.devsuperior.dsvendas.entity.Sale;
+
 public class SaleDTO {
 
     private Long id;
@@ -14,17 +16,26 @@ public class SaleDTO {
 
     private LocalDate date;
 
-    private SellerDTO seller; //isso é uma composição
+    private SellerDTO sellerDTO; //isso é uma composição
 
     public SaleDTO() {}
 
-    public SaleDTO(Long id, Integer visited, Integer deals, Double amount, LocalDate date, SellerDTO seller) {
+    public SaleDTO(Long id, Integer visited, Integer deals, Double amount, LocalDate date, SellerDTO sellerDTO) {
         this.id = id;
         this.visited = visited;
         this.deals = deals;
         this.amount = amount;
         this.date = date;
-        this.seller = seller;
+        this.sellerDTO = sellerDTO;
+    }
+
+    public SaleDTO(Sale sale) {
+        this.id = sale.getId();
+        this.visited = sale.getVisited();
+        this.deals = sale.getDeals();
+        this.amount = sale.getAmount();
+        this.date = sale.getDate();
+        this.sellerDTO = new SellerDTO(sale.getSeller());
     }
 
     public Long getId() {
@@ -67,12 +78,12 @@ public class SaleDTO {
         this.date = date;
     }
 
-    public SellerDTO getSeller() {
-        return seller;
+    public SellerDTO getSellerDTO() {
+        return sellerDTO;
     }
 
-    public void setSeller(SellerDTO seller) {
-        this.seller = seller;
+    public void setSellerDTO(SellerDTO sellerDTO) {
+        this.sellerDTO = sellerDTO;
     }
 
 }
